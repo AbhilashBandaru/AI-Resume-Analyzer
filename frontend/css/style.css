@@ -753,3 +753,124 @@ footer {
     }
 
 }
+/* =========================================
+   HISTORY PAGE
+========================================= */
+
+.history-section {
+    background: #f8fafc;
+    min-height: calc(100vh - 150px);
+}
+
+.history-list {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+
+/* =========================================
+   HISTORY CARD
+========================================= */
+
+.history-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    padding: 25px 30px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.history-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.07);
+}
+
+
+/* =========================================
+   HISTORY INFORMATION
+========================================= */
+
+.history-info h2 {
+    margin-bottom: 6px;
+    color: #0f172a;
+    font-size: 1.2rem;
+}
+
+.history-info p {
+    margin-bottom: 5px;
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+.history-info span {
+    color: #94a3b8;
+    font-size: 0.85rem;
+}
+
+
+/* =========================================
+   HISTORY SCORE
+========================================= */
+
+.history-score {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.history-score strong {
+    min-width: 60px;
+    color: #2563eb;
+    font-size: 1.4rem;
+    text-align: center;
+}
+
+
+/* =========================================
+   HISTORY RESPONSIVE
+========================================= */
+
+@media (max-width: 600px) {
+
+    .history-card {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 22px;
+    }
+
+    .history-score {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .history-score .btn {
+        width: auto;
+    }
+
+}
+
+@media (max-width: 450px) {
+
+    .history-score {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+
+    .history-score strong {
+        text-align: left;
+    }
+
+    .history-score .btn {
+        width: 100%;
+        text-align: center;
+    }
+
+}
