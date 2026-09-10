@@ -405,3 +405,172 @@ footer {
         text-align: center;
     }
 }
+/* =========================================
+   ANALYZER PAGE
+========================================= */
+
+.analyzer-section {
+    background: #f8fafc;
+    min-height: calc(100vh - 150px);
+}
+
+.analyzer-section .section-heading {
+    margin-bottom: 40px;
+}
+
+
+/* =========================================
+   ANALYZER FORM
+========================================= */
+
+.analyzer-form {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+}
+
+
+/* =========================================
+   FORM GROUP
+========================================= */
+
+.form-group {
+    margin-bottom: 28px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 10px;
+    color: #0f172a;
+    font-weight: 700;
+}
+
+
+/* =========================================
+   FILE INPUT
+========================================= */
+
+.form-group input[type="file"] {
+    width: 100%;
+    padding: 14px;
+    border: 2px dashed #cbd5e1;
+    border-radius: 10px;
+    background: #f8fafc;
+    cursor: pointer;
+}
+
+.form-group input[type="file"]:hover {
+    border-color: #2563eb;
+}
+
+
+/* =========================================
+   TEXTAREA
+========================================= */
+
+.form-group textarea {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 1rem;
+    line-height: 1.6;
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-group textarea:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+
+/* =========================================
+   FORM HELP TEXT
+========================================= */
+
+.form-help {
+    margin-top: 8px;
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+
+/* =========================================
+   FILE NAME
+========================================= */
+
+.file-name {
+    margin-top: 10px;
+    color: #2563eb;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+
+/* =========================================
+   FORM ERRORS
+========================================= */
+
+.form-error {
+    margin-top: 8px;
+    color: #dc2626;
+    font-size: 0.9rem;
+}
+
+
+/* =========================================
+   ANALYZE BUTTON
+========================================= */
+
+.analyze-button {
+    width: 100%;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+
+/* =========================================
+   LOADING MESSAGE
+========================================= */
+
+.loading-message {
+    margin-top: 25px;
+    padding: 18px;
+    text-align: center;
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    border-radius: 10px;
+}
+
+.loading-message p:first-child {
+    color: #2563eb;
+    font-weight: 700;
+}
+
+
+/* =========================================
+   ANALYZER RESPONSIVE DESIGN
+========================================= */
+
+@media (max-width: 700px) {
+
+    .analyzer-form {
+        padding: 25px;
+    }
+
+}
+
+@media (max-width: 450px) {
+
+    .analyzer-form {
+        padding: 20px;
+    }
+
+}
