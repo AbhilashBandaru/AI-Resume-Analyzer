@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Analysis Results | AI Resume Analyzer</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- ==============================
+         NAVBAR
+    =============================== -->
+
+    <header>
+
+        <nav class="navbar container">
+
+            <a href="index.html" class="logo">
+                AI Resume Analyzer
+            </a>
+
+            <div class="nav-links">
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <a href="index.html#features">
+                    Features
+                </a>
+
+                <a href="index.html#how-it-works">
+                    How It Works
+                </a>
+
+                <a href="analyze.html" class="btn btn-small">
+                    New Analysis
+                </a>
+
+            </div>
+
+        </nav>
+
+    </header>
+
+
+    <!-- ==============================
+         DASHBOARD
+    =============================== -->
+
+    <main>
+
+        <section class="section dashboard-section">
+
+            <div class="container">
+
+                <!-- Page Heading -->
+
+                <div class="section-heading">
+
+                    <p class="section-label">
+                        RESUME ANALYSIS
+                    </p>
+
+                    <h1>
+                        Your Resume Results
+                    </h1>
+
+                    <p>
+                        Here is the analysis of your resume against
+                        the selected job description.
+                    </p>
+
+                </div>
+
+
+                <!-- ==============================
+                     MATCH SCORE
+                =============================== -->
+
+                <div class="score-card">
+
+                    <p class="score-label">
+                        RESUME MATCH SCORE
+                    </p>
+
+                    <div class="score">
+                        <span id="matchScore">82</span>%
+                    </div>
+
+                    <p class="score-description">
+                        Your resume has a strong match with this job.
+                    </p>
+
+                </div>
+
+
+                <!-- ==============================
+                     SKILLS GRID
+                =============================== -->
+
+                <div class="results-grid">
+
+
+                    <!-- Matched Skills -->
+
+                    <article class="result-card">
+
+                        <h2>
+                            Matched Skills
+                        </h2>
+
+                        <p class="result-description">
+                            Skills found in both your resume and
+                            the job description.
+                        </p>
+
+                        <div
+                            id="matchedSkills"
+                            class="skill-list"
+                        >
+
+                            <span class="skill matched">
+                                Python
+                            </span>
+
+                            <span class="skill matched">
+                                Django
+                            </span>
+
+                            <span class="skill matched">
+                                PostgreSQL
+                            </span>
+
+                            <span class="skill matched">
+                                Git
+                            </span>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- Missing Skills -->
+
+                    <article class="result-card">
+
+                        <h2>
+                            Missing Skills
+                        </h2>
+
+                        <p class="result-description">
+                            Important skills from the job description
+                            that are missing from your resume.
+                        </p>
+
+                        <div
+                            id="missingSkills"
+                            class="skill-list"
+                        >
+
+                            <span class="skill missing">
+                                Docker
+                            </span>
+
+                            <span class="skill missing">
+                                AWS
+                            </span>
+
+                            <span class="skill missing">
+                                React
+                            </span>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+
+                <!-- ==============================
+                     AI RECOMMENDATIONS
+                =============================== -->
+
+                <article class="recommendations-card">
+
+                    <h2>
+                        AI Recommendations
+                    </h2>
+
+                    <p class="result-description">
+                        Suggestions to improve your resume
+                        for this job.
+                    </p>
+
+                    <div
+                        id="recommendations"
+                        class="recommendations-list"
+                    >
+
+                        <div class="recommendation">
+                            <span class="recommendation-number">
+                                01
+                            </span>
+
+                            <p>
+                                Add more REST API development
+                                experience to your projects.
+                            </p>
+                        </div>
+
+
+                        <div class="recommendation">
+                            <span class="recommendation-number">
+                                02
+                            </span>
+
+                            <p>
+                                Highlight your PostgreSQL
+                                database experience.
+                            </p>
+                        </div>
+
+
+                        <div class="recommendation">
+                            <span class="recommendation-number">
+                                03
+                            </span>
+
+                            <p>
+                                Consider adding Docker experience
+                                to your technical skills.
+                            </p>
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- ==============================
+                     ACTION
+                =============================== -->
+
+                <div class="dashboard-action">
+
+                    <a
+                        href="analyze.html"
+                        class="btn"
+                    >
+                        Analyze Another Resume
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ==============================
+         FOOTER
+    =============================== -->
+
+    <footer>
+
+        <div class="footer-content container">
+
+            <p>
+                © 2026 AI Resume Analyzer
+            </p>
+
+            <p>
+                Built with HTML, CSS & JavaScript
+            </p>
+
+        </div>
+
+    </footer>
+<script src="js/dashboard.js"></script>
+</body>
+
+</html>

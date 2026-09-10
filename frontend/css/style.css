@@ -574,3 +574,182 @@ footer {
     }
 
 }
+/* =========================================
+   DASHBOARD
+========================================= */
+
+.dashboard-section {
+    background: #f8fafc;
+    min-height: calc(100vh - 150px);
+}
+
+
+/* =========================================
+   SCORE CARD
+========================================= */
+
+.score-card {
+    max-width: 600px;
+    margin: 0 auto 40px;
+    padding: 40px;
+    text-align: center;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+}
+
+.score-label {
+    color: #64748b;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.score {
+    margin: 10px 0;
+    color: #2563eb;
+    font-size: 4.5rem;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.score-description {
+    color: #64748b;
+}
+
+
+/* =========================================
+   RESULTS GRID
+========================================= */
+
+.results-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-bottom: 24px;
+}
+
+
+/* =========================================
+   RESULT CARD
+========================================= */
+
+.result-card {
+    padding: 30px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+}
+
+.result-card h2,
+.recommendations-card h2 {
+    margin-bottom: 10px;
+    color: #0f172a;
+    font-size: 1.4rem;
+}
+
+.result-description {
+    margin-bottom: 22px;
+    color: #64748b;
+    font-size: 0.95rem;
+}
+
+
+/* =========================================
+   SKILL LIST
+========================================= */
+
+.skill-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.skill {
+    display: inline-block;
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.skill.matched {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.skill.missing {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+
+/* =========================================
+   RECOMMENDATIONS
+========================================= */
+
+.recommendations-card {
+    padding: 30px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+}
+
+.recommendations-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.recommendation {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 18px;
+    background: #f8fafc;
+    border-radius: 10px;
+}
+
+.recommendation-number {
+    flex-shrink: 0;
+    font-weight: 700;
+    color: #2563eb;
+}
+
+.recommendation p {
+    color: #475569;
+}
+
+
+/* =========================================
+   DASHBOARD ACTION
+========================================= */
+
+.dashboard-action {
+    margin-top: 35px;
+    text-align: center;
+}
+
+
+/* =========================================
+   DASHBOARD RESPONSIVE
+========================================= */
+
+@media (max-width: 700px) {
+
+    .results-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .score-card,
+    .result-card,
+    .recommendations-card {
+        padding: 25px;
+    }
+
+    .score {
+        font-size: 3.5rem;
+    }
+
+}
