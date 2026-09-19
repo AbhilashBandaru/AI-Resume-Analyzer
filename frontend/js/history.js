@@ -1,124 +1,118 @@
-// =========================================
-// SAMPLE HISTORY DATA
-// =========================================
+console.log("HISTORY.JS LOADED");
 
-const historyData = [
-    {
-        job_title: "Python Developer",
-        resume_name: "abhilash_resume.pdf",
-        match_score: 87,
-        date: "September 10, 2026"
-    },
-    {
-        job_title: "AI/ML Engineer",
-        resume_name: "abhilash_resume.pdf",
-        match_score: 79,
-        date: "September 8, 2026"
-    },
-    {
-        job_title: "Backend Developer",
-        resume_name: "abhilash_resume.pdf",
-        match_score: 72,
-        date: "September 5, 2026"
+const historyList =
+    document.getElementById("historyList");
+
+async function loadHistory() {
+
+    try {
+
+        const response =
+            await fetch(
+                "http://127.0.0.1:8000/api/history/"
+            );
+
+        const data =
+            await response.json();
+
+        console.log(
+            "HISTORY RESPONSE:",
+            data
+        );
+
+        if (!response.ok) {
+            throw new Error(
+                data.error ||
+                "Could not load history."
+            );
+        }
+
+        const analyses =
+            data.analyses || [];
+
+        historyList.innerHTML = "";
+
+        if (analyses.length === 0) {
+
+            historyList.innerHTML = `
+                <p>
+                    No analysis history available.
+                </p>
+            `;
+
+            return;
+        }
+
+        analyses.forEach(function (analysis) {
+
+            const historyCard =
+                document.createElement("article");
+
+            historyCard.classList.add(
+                "history-card"
+            );
+
+            const date =
+                new Date(
+                    analysis.created_at
+                );
+
+            const resumeName =
+                analysis.resume_name
+                    .split("/")
+                    .pop();
+
+            historyCard.innerHTML = `
+                <div class="history-info">
+
+                    <h2>
+                        ${analysis.job_title}
+                    </h2>
+
+                    <p>
+                        Resume: ${resumeName}
+                    </p>
+
+                    <span>
+                        ${date.toLocaleDateString()}
+                    </span>
+
+                </div>
+
+                <div class="history-score">
+
+                    <strong>
+                        ${analysis.match_score}%
+                    </strong>
+
+                    <a
+                        href="dashboard.html"
+                        class="btn btn-small"
+                    >
+                        View Results
+                    </a>
+
+                </div>
+            `;
+
+            historyList.appendChild(
+                historyCard
+            );
+        });
+
+    } catch (error) {
+
+        console.error(
+            "HISTORY ERROR:",
+            error
+        );
+
+        historyList.innerHTML = `
+            <p>
+                Unable to load analysis history.
+            </p>
+        `;
     }
-];
+}
 
-
-// =========================================
-// GET HISTORY CONTAINER
-// =========================================
-
-const historyList = document.getElementById("historyList");
-
-
-// =========================================
-// CLEAR STATIC HTML
-// =========================================
-
-historyList.innerHTML = "";
-
-
-// =========================================
-// CREATE HISTORY CARDS
-// =========================================
-
-historyData.forEach(function (analysis) {
-
-    const historyCard = document.createElement("article");
-
-    historyCard.classList.add("history-card");
-
-
-    // -----------------------------
-    // History Information
-    // -----------------------------
-
-    const historyInfo = document.createElement("div");
-
-    historyInfo.classList.add("history-info");
-
-
-    const jobTitle = document.createElement("h2");
-
-    jobTitle.textContent = analysis.job_title;
-
-
-    const resumeName = document.createElement("p");
-
-    resumeName.textContent =
-        `Resume: ${analysis.resume_name}`;
-
-
-    const analysisDate = document.createElement("span");
-
-    analysisDate.textContent = analysis.date;
-
-
-    historyInfo.appendChild(jobTitle);
-
-    historyInfo.appendChild(resumeName);
-
-    historyInfo.appendChild(analysisDate);
-
-
-    // -----------------------------
-    // Score Section
-    // -----------------------------
-
-    const historyScore = document.createElement("div");
-
-    historyScore.classList.add("history-score");
-
-
-    const score = document.createElement("strong");
-
-    score.textContent =
-        `${analysis.match_score}%`;
-
-
-    const viewButton = document.createElement("a");
-
-    viewButton.href = "dashboard.html";
-
-    viewButton.classList.add("btn", "btn-small");
-
-    viewButton.textContent = "View Results";
-
-
-    historyScore.appendChild(score);
-
-    historyScore.appendChild(viewButton);
-
-
-    // -----------------------------
-    // Add Everything to Card
-    // -----------------------------
-
-    historyCard.appendChild(historyInfo);
-
-    historyCard.appendChild(historyScore);
-
-
-    historyList.appendChild(historyCard);
-
-});
+loadHistory();

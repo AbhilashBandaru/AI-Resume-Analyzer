@@ -130,3 +130,39 @@ def analyze_resume_api(request):
     "missing_skills": analysis.missing_skills,
     "recommendations": analysis.recommendations
 })
+def analysis_history(request):
+
+    if request.method != "GET":
+        return JsonResponse(
+            {"error": "Only GET requests are allowed."},
+            status=405
+        )
+
+    user = User.objects.first()
+
+    if not user:
+        return JsonResponse({
+            "analyses": []
+        })
+
+    analyses = Analysis.objects.filter(
+        user=user
+    ).order_by("-created_at")
+
+    history = []
+
+    for analysis in analyses:
+        history.append({
+            "analysis_id": analysis.id,
+            "resume_name": analysis.resume.file.name,
+            "job_title": analysis.job_description.title,
+            "match_score": analysis.match_score,
+            "matched_skills": analysis.matched_skills,
+            "missing_skills": analysis.missing_skills,
+            "recommendations": analysis.recommendations,
+            "created_at": analysis.created_at.isoformat()
+        })
+
+    return JsonResponse({
+        "analyses": history
+    })
