@@ -1,13 +1,22 @@
-const matchScore = document.getElementById("matchScore");
-const matchedSkills = document.getElementById("matchedSkills");
-const missingSkills = document.getElementById("missingSkills");
-const recommendations = document.getElementById("recommendations");
+const matchScore =
+    document.getElementById("matchScore");
+
+const matchedSkills =
+    document.getElementById("matchedSkills");
+
+const missingSkills =
+    document.getElementById("missingSkills");
+
+const recommendations =
+    document.getElementById("recommendations");
 
 
-const storedResult = sessionStorage.getItem("analysisResult");
+const storedResult =
+    sessionStorage.getItem("analysisResult");
 
 
 if (!storedResult) {
+
     matchScore.textContent = "0";
 
     matchedSkills.innerHTML =
@@ -21,84 +30,149 @@ if (!storedResult) {
 
 } else {
 
-    const analysisData = JSON.parse(storedResult);
+    const analysisData =
+        JSON.parse(storedResult);
 
 
-    // Match score
-    matchScore.textContent = analysisData.match_score;
+    // -----------------------------
+    // Match Score
+    // -----------------------------
+
+    matchScore.textContent =
+        analysisData.match_score ?? 0;
 
 
-    // Matched skills
+    // -----------------------------
+    // Matched Skills
+    // -----------------------------
+
     matchedSkills.innerHTML = "";
 
-    analysisData.matched_skills.forEach(function (skill) {
+    const matchedSkillsList =
+        analysisData.matched_skills || [];
 
-        const skillElement = document.createElement("span");
+    if (matchedSkillsList.length === 0) {
 
-        skillElement.classList.add("skill", "matched");
+        matchedSkills.innerHTML =
+            "<p>No matched skills found.</p>";
 
-        skillElement.textContent = skill;
+    } else {
 
-        matchedSkills.appendChild(skillElement);
-    });
+        matchedSkillsList.forEach(function (skill) {
+
+            const skillElement =
+                document.createElement("span");
+
+            skillElement.classList.add(
+                "skill",
+                "matched"
+            );
+
+            skillElement.textContent =
+                skill;
+
+            matchedSkills.appendChild(
+                skillElement
+            );
+        });
+    }
 
 
-    // Missing skills
+    // -----------------------------
+    // Missing Skills
+    // -----------------------------
+
     missingSkills.innerHTML = "";
 
-    analysisData.missing_skills.forEach(function (skill) {
+    const missingSkillsList =
+        analysisData.missing_skills || [];
 
-        const skillElement = document.createElement("span");
+    if (missingSkillsList.length === 0) {
 
-        skillElement.classList.add("skill", "missing");
+        missingSkills.innerHTML =
+            "<p>No missing skills found.</p>";
 
-        skillElement.textContent = skill;
+    } else {
 
-        missingSkills.appendChild(skillElement);
-    });
+        missingSkillsList.forEach(function (skill) {
+
+            const skillElement =
+                document.createElement("span");
+
+            skillElement.classList.add(
+                "skill",
+                "missing"
+            );
+
+            skillElement.textContent =
+                skill;
+
+            missingSkills.appendChild(
+                skillElement
+            );
+        });
+    }
 
 
+    // -----------------------------
     // Recommendations
+    // -----------------------------
+
     recommendations.innerHTML = "";
 
-    analysisData.recommendations.forEach(function (
-        recommendation,
-        index
-    ) {
-
-        const recommendationElement =
-            document.createElement("div");
-
-        recommendationElement.classList.add("recommendation");
+    const recommendationsList =
+        analysisData.recommendations || [];
 
 
-        const numberElement =
-            document.createElement("span");
+    if (recommendationsList.length === 0) {
 
-        numberElement.classList.add("recommendation-number");
+        recommendations.innerHTML =
+            "<p>Recommendations will be available soon.</p>";
 
-        numberElement.textContent =
-            String(index + 1).padStart(2, "0");
+    } else {
+
+        recommendationsList.forEach(
+            function (recommendation, index) {
+
+                const recommendationElement =
+                    document.createElement("div");
+
+                recommendationElement.classList.add(
+                    "recommendation"
+                );
 
 
-        const textElement =
-            document.createElement("p");
+                const numberElement =
+                    document.createElement("span");
 
-        textElement.textContent =
-            recommendation;
+                numberElement.classList.add(
+                    "recommendation-number"
+                );
+
+                numberElement.textContent =
+                    String(index + 1).padStart(2, "0");
 
 
-        recommendationElement.appendChild(
-            numberElement
+                const textElement =
+                    document.createElement("p");
+
+                textElement.textContent =
+                    recommendation;
+
+
+                recommendationElement.appendChild(
+                    numberElement
+                );
+
+                recommendationElement.appendChild(
+                    textElement
+                );
+
+
+                recommendations.appendChild(
+                    recommendationElement
+                );
+            }
         );
-
-        recommendationElement.appendChild(
-            textElement
-        );
-
-
-        recommendations.appendChild(
-            recommendationElement
-        );
-    });
+    }
 }

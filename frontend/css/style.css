@@ -874,3 +874,32 @@ footer {
     }
 
 }
+/* ========================================
+   ANALYZER FORM CLICK FIX
+======================================== */
+
+.analyzer-section {
+    position: relative;
+    z-index: 1;
+}
+
+.analyzer-form {
+    position: relative;
+    z-index: 10;
+    pointer-events: auto;
+}
+
+.analyzer-form input,
+.analyzer-form textarea,
+.analyzer-form button {
+    position: relative;
+    z-index: 20;
+    pointer-events: auto;
+}
+
+#analyzeButton {
+    position: relative;
+    z-index: 9999;
+    pointer-events: auto;
+    cursor: pointer;
+}

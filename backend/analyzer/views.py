@@ -120,12 +120,13 @@ def analyze_resume_api(request):
         match_score=result["match_score"],
         matched_skills=result["matched_skills"],
         missing_skills=result["missing_skills"],
-        recommendations=[]
+        recommendations=result["recommendations"]
     )
 
     return JsonResponse({
-        "analysis_id": analysis.id,
-        "match_score": analysis.match_score,
-        "matched_skills": analysis.matched_skills,
-        "missing_skills": analysis.missing_skills
-    })
+    "analysis_id": analysis.id,
+    "match_score": analysis.match_score,
+    "matched_skills": analysis.matched_skills,
+    "missing_skills": analysis.missing_skills,
+    "recommendations": analysis.recommendations
+})
