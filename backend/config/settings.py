@@ -10,6 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.1/ref/settings/
 """
 
+import os
+import dj_database_url
 from pathlib import Path
 from tabnanny import check
 
@@ -21,13 +23,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-lk#a9j#(71u^@i+m=2vf3mzxva2p12sl4v-pij5*eilxza(%^_'
-
+SECRET_KEY = os.environ.get(
+    "SECRET_KEY",
+    "local-dev-secret-key-9f4c8b2e7a1d6m3p5x8q0z4n6"
+)
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
-
+DEBUG = os.environ.get(
+    "DEBUG",
+    "False"
+) == "True"
+ALLOWED_HOSTS = [
+    "localhost",
+    "127.0.0.1",
+]
 
 # Application definition
 
@@ -45,9 +53,11 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    "django.middleware.security.SecurityMiddleware",
 
+    "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "corsheaders.middleware.CorsMiddleware",
+
 
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -80,16 +90,24 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.1/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "resume_analyzer",
-        "USER": "postgres",
-        "PASSWORD": "Devi@123",
-        "HOST": "localhost",
-        "PORT": "5432",
+if os.environ.get("DATABASE_URL"):
+    DATABASES = {
+        "default": dj_database_url.config(
+            conn_max_age=600,
+            conn_health_checks=True,
+        )
     }
-}
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": "resume_analyzer",
+            "USER": "postgres",
+            "PASSWORD": os.environ.get("POSTGRES_PASSWORD"),
+            "HOST": "localhost",
+            "PORT": "5432",
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/6.1/ref/settings/#auth-password-validators
@@ -126,16 +144,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 
 # Email
 # https://docs.djangoproject.com/en/6.1/topics/email/#topic-email-configuration
 
-MAILERS = {
-    'default': {
-        'BACKEND': 'django.core.mail.backends.console.EmailBackend',
-    },
-}
+
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
@@ -143,3 +158,24 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:5500",
     "http://localhost:5500",
 ]
+SECURE_SSL_REDIRECT = os.environ.get(
+    "SECURE_SSL_REDIRECT",
+    "False"
+) == "True"
+
+SECURE_HSTS_SECONDS = int(
+    os.environ.get(
+        "SECURE_HSTS_SECONDS",
+        "0"
+    )
+)
+
+SESSION_COOKIE_SECURE = os.environ.get(
+    "SESSION_COOKIE_SECURE",
+    "False"
+) == "True"
+
+CSRF_COOKIE_SECURE = os.environ.get(
+    "CSRF_COOKIE_SECURE",
+    "False"
+) == "True"
