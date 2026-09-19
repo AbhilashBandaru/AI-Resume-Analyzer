@@ -9,7 +9,7 @@ async function loadHistory() {
 
         const response =
             await fetch(
-                "http://127.0.0.1:8000/api/history/"
+"https://ai-resume-analyzer-fk8m.onrender.com/api/history/"
             );
 
         const data =

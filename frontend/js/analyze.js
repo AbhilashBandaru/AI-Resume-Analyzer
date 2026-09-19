@@ -293,8 +293,8 @@ analyzeButton.addEventListener(
 
             const analysisResponse =
                 await fetch(
-                    "http://127.0.0.1:8000/api/analyze/",
-                    {
+                         "https://ai-resume-analyzer-fk8m.onrender.com/api/analyze/",
+                        {
                         method: "POST",
                         body: analysisData
                     }
