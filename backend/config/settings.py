@@ -35,6 +35,8 @@ DEBUG = os.environ.get(
 ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
+    "ai-resume-analyzer-fk8m.onrender.com",
+
 ]
 
 # Application definition
