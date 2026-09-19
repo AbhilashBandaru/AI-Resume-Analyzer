@@ -57,3 +57,75 @@ def upload_resume(request):
         "message": "Resume uploaded successfully",
         "resume_id": resume.id
     })
+from .models import JobDescription, Analysis
+from .services.analyzer_service import analyze_resume
+
+
+@csrf_exempt
+def analyze_resume_api(request):
+
+    if request.method != "POST":
+        return JsonResponse(
+            {"error": "Only POST requests are allowed."},
+            status=405
+        )
+
+    resume_id = request.POST.get("resume_id")
+    job_title = request.POST.get("job_title")
+    job_description = request.POST.get("job_description")
+
+    if not resume_id:
+        return JsonResponse(
+            {"error": "resume_id is required."},
+            status=400
+        )
+
+    if not job_title:
+        return JsonResponse(
+            {"error": "job_title is required."},
+            status=400
+        )
+
+    if not job_description:
+        return JsonResponse(
+            {"error": "job_description is required."},
+            status=400
+        )
+
+    try:
+        resume = Resume.objects.get(id=resume_id)
+    except Resume.DoesNotExist:
+        return JsonResponse(
+            {"error": "Resume not found."},
+            status=404
+        )
+
+    result = analyze_resume(
+        resume.extracted_text,
+        job_description
+    )
+
+    user = resume.user
+
+    job = JobDescription.objects.create(
+        user=user,
+        title=job_title,
+        description=job_description
+    )
+
+    analysis = Analysis.objects.create(
+        user=user,
+        resume=resume,
+        job_description=job,
+        match_score=result["match_score"],
+        matched_skills=result["matched_skills"],
+        missing_skills=result["missing_skills"],
+        recommendations=[]
+    )
+
+    return JsonResponse({
+        "analysis_id": analysis.id,
+        "match_score": analysis.match_score,
+        "matched_skills": analysis.matched_skills,
+        "missing_skills": analysis.missing_skills
+    })

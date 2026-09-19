@@ -15,7 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from analyzer.views import upload_resume
+from analyzer.views import upload_resume, analyze_resume_api
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
@@ -23,5 +23,6 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("api/resumes/upload/", upload_resume),
+    path("api/analyze/", analyze_resume_api),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
